@@ -1,0 +1,12 @@
+git+https://github.com/kshitijgundale/twitter-rumour-dataset
+Flask
+google
+newspaper3k
+pandas
+pyvis
+torch
+torch-scatter
+torch-geometric
+torch-sparse
+nltk
+flask-cors
