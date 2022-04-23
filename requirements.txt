@@ -200,13 +200,13 @@ toolz==0.11.2
     # via
     #   dask
     #   partd
-torch @ https://download.pytorch.org/whl/cpu/torch-1.11.0%2Bcpu-cp38-cp38-linux_x86_64.whl
+torch @ https://download.pytorch.org/whl/cpu/torch-1.11.0%2Bcpu-cp36-cp36-linux_x86_64.whl
     # via -r requirements.in
 torch-geometric==2.0.4
     # via -r requirements.in
-torch-scatter @ https://data.pyg.org/whl/torch-1.9.0%2Bcpu/torch_scatter-2.0.9-cp38-cp38-linux_x86_64.whl
+torch-scatter @ https://data.pyg.org/whl/torch-1.9.0%2Bcpu/torch_scatter-2.0.9-cp36-cp36-linux_x86_64.whl
     # via -r requirements.in
-torch-sparse @ https://data.pyg.org/whl/torch-1.9.0%2Bcpu/torch_sparse-0.6.10-cp38-cp38-linux_x86_64.whl
+torch-sparse @ https://data.pyg.org/whl/torch-1.9.0%2Bcpu/torch_sparse-0.6.10-cp36-cp36-linux_x86_64.whl
     # via -r requirements.in
 tqdm==4.63.1
     # via
