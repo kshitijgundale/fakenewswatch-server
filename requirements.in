@@ -7,10 +7,7 @@ google
 newspaper3k
 pandas
 pyvis
-torch==1.11.0+cpu
-torch-scatter
 torch-geometric
-torch-sparse
 nltk
 flask-cors
 gunicorn
