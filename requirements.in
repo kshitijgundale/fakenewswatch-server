@@ -6,7 +6,7 @@ google
 newspaper3k
 pandas
 pyvis
-torch
+torch==1.11.0+cpu
 torch-scatter
 torch-geometric
 torch-sparse
