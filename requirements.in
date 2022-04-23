@@ -1,3 +1,4 @@
+-f https://download.pytorch.org/whl/torch_stable.html
 git+https://github.com/kshitijgundale/twitter-rumour-dataset
 Flask
 google
