@@ -7,6 +7,7 @@ from app.fakenews.utils import get_account_age, followers_count, following_count
 from torch_geometric.loader import DataLoader
 from app.fakenews.gnn import GNN
 import torch
+import uuid
 
 model_data = torch.load("./app/fakenews/politifact_model.pt")
 model_params = model_data['model_params']
@@ -17,11 +18,11 @@ model.load_state_dict(state_dict)
 
 def link_preview(url):
     try:
-        print("hello")
         article = Article(url)
         article.download()
         article.parse()
         return {
+            'id': uuid.uuid4(),
             'url': url,
             'title': article.title,
             'image': article.top_image,
@@ -35,7 +36,7 @@ def recommend_news(statements, urls):
     for s in statements:
         news_cnt = 0
         for i in search(s, tld="co.in", num=10, stop=None, pause=2):
-            if news_cnt == 2:
+            if news_cnt == 5:
                 break
             news.append(link_preview(i))
             news_cnt += 1
@@ -48,7 +49,7 @@ def recommend_news(statements, urls):
             article.parse()
             if article.title:
                 for i in search(article.title, tld="co.in", num=10, stop=None, pause=2):
-                    if news_cnt == 2:
+                    if news_cnt == 5:
                         break
                     news.append(link_preview(i))
                     news_cnt += 1
@@ -57,7 +58,11 @@ def recommend_news(statements, urls):
 
     return {"news": news}
 
-def get_twitter_data(statements, urls, feedback=None):
+def get_twitter_data(
+    statements, urls, feedback,
+    num_news, num_tweets,
+    inlcude_retweets, include_quotes, include_replies
+):
     if feedback:
         urls += feedback
         get_related_news_urls_from_statement = False
@@ -72,16 +77,22 @@ def get_twitter_data(statements, urls, feedback=None):
         since="2019-01-01",
         until="2022-01-01",
         url_search=True,
+        keywords_from_statement=True,
         get_related_news_urls_from_statement=get_related_news_urls_from_statement,
         get_related_news_urls_from_urls=get_related_news_urls_from_urls,
-        num_news=1,
-        max_tweets=5,
-        fetch_retweets=True,
+        num_news=num_news,
+        max_tweets=num_tweets,
+        fetch_retweets=inlcude_retweets,
+        fetch_quotes=include_quotes,
+        fetch_replies=include_replies,
         APP_KEY="ASjMzMTXZIG8oqevrZeTU7G05",
         APP_SECRET = "EaVgcUQvNPCzFbZtNDhnvC4aIIY0yrVrFReHXVyCead9kyvDer"
     )
 
     data = scraper.get_twitter_data()
+
+    if not data['tweets']:
+        return []
 
     graph = PropagationGraph(
         tweets = data['tweets'],

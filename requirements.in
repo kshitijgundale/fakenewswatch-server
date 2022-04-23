@@ -10,3 +10,4 @@ torch-geometric
 torch-sparse
 nltk
 flask-cors
+gunicorn

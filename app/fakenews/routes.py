@@ -10,7 +10,17 @@ def get_predictions():
     urls = request_data['urls']
     feedback = request_data['feedback']
 
-    return jsonify(service.get_twitter_data(urls, statements, feedback))
+    num_tweets = int(request_data['num_tweets'])
+    num_news = int(request_data['num_news'])
+    include_retweets = request_data['include_retweets']
+    include_quotes = request_data['include_quotes']
+    include_replies = request_data['include_replies']
+
+    return jsonify(service.get_twitter_data(
+        statements, urls, feedback,
+        num_news, num_tweets,
+        include_retweets, include_quotes, include_replies
+    ))
 
 @bp.route('/recommend', methods=['POST'])
 @cross_origin()
