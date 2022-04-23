@@ -1,4 +1,4 @@
--f https://download.pytorch.org/whl/torch_stable.html
+-f https://data.pyg.org/whl/torch-1.11.0+cpu.html
 git+https://github.com/kshitijgundale/twitter-rumour-dataset
 Flask
 google
